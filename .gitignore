@@ -70,3 +70,10 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+/Assets/Fantastic Dungeon Pack
+Assets/Fantastic Dungeon Pack.meta
+/Assets/3DShapes
+/Assets/Fantastic Interior Pack
+/Assets/StylizedCharacter
+Assets/Fantastic Interior Pack.meta
+Assets/StylizedCharacter.meta
