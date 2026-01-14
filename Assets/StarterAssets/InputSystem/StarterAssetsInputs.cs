@@ -16,6 +16,9 @@ namespace StarterAssets
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
+		[Header("Control Scheme")]
+		public bool useArrowKeys = false; // NEW
+
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
@@ -23,12 +26,16 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			// Only use Input System movement if NOT using arrow keys
+			if (!useArrowKeys)
+			{
+				MoveInput(value.Get<Vector2>());
+			}
 		}
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if (cursorInputForLook)
 			{
 				LookInput(value.Get<Vector2>());
 			}
@@ -45,11 +52,50 @@ namespace StarterAssets
 		}
 #endif
 
+		private void Update()
+		{
+#if ENABLE_INPUT_SYSTEM
+			if (useArrowKeys)
+			{
+				ReadArrowKeys();
+			}
+#endif
+		}
+
+#if ENABLE_INPUT_SYSTEM
+		private void ReadArrowKeys()
+		{
+			if (Keyboard.current == null)
+				return;
+
+			Vector2 input = Vector2.zero;
+
+			if (Keyboard.current.leftArrowKey.isPressed)
+				input.x -= 1f;
+			if (Keyboard.current.rightArrowKey.isPressed)
+				input.x += 1f;
+			if (Keyboard.current.upArrowKey.isPressed)
+				input.y += 1f;
+			if (Keyboard.current.downArrowKey.isPressed)
+				input.y -= 1f;
+
+			MoveInput(input.normalized);
+
+      if(Keyboard.current.rightShiftKey.isPressed)
+      {
+          SprintInput(true);
+      }
+      else
+      {
+          SprintInput(false);
+      }
+		}
+#endif
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
-		} 
+		}
 
 		public void LookInput(Vector2 newLookDirection)
 		{
@@ -76,5 +122,4 @@ namespace StarterAssets
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 	}
-	
 }
