@@ -10459,6 +10459,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pointy_Full_Arch_2_tiles_prefab_2 (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8362302210904167525, guid: 05149b41e73a00147bdf594bba54d7c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
